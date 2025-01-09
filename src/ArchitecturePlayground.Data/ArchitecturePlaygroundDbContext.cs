@@ -23,7 +23,7 @@ namespace ArchitecturePlayground.Data
 
         public DbSet<Video> Videos { get; set; } = null!;
         public DbSet<Streamer> Streamers { get; set; } = null!;
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Video>(entity =>
@@ -34,6 +34,41 @@ namespace ArchitecturePlayground.Data
                     .HasPrincipalKey(p => p.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
+
+            modelBuilder.Entity<Video>(entity =>
+            {
+                entity.HasMany(d => d.Actors)
+                    .WithOne(p => p.Video)
+                    .HasForeignKey(d => d.VideoId)
+                    .HasPrincipalKey(p => p.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<Video>(entity =>
+            {
+                entity.HasOne(d => d.Director)
+                    .WithMany(p => p.Videos)
+                    .HasForeignKey(d => d.DirectorId)
+                    .HasPrincipalKey(p => p.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+            modelBuilder.Entity<VideoActor>(entity =>
+            {
+                entity.HasKey(e => new { e.VideoId, e.ActorId });
+                entity.HasOne(d => d.Actor)
+                    .WithMany(p => p.Videos)
+                    .HasForeignKey(d => d.ActorId)
+                    .HasPrincipalKey(p => p.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.HasOne(d => d.Video)
+                    .WithMany(p => p.Actors)
+                    .HasForeignKey(d => d.VideoId)
+                    .HasPrincipalKey(p => p.Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+            });
+
+
         }
     }
 }

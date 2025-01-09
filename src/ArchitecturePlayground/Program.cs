@@ -56,6 +56,7 @@ void QueryWithLinq()
                      v.Url,
                      Streamer = s.Name
                  };
+
     foreach (var video in videos)
     {
         ConsoleHelper.WriteJson(video, false, false, false, true);
