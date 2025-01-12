@@ -23,6 +23,9 @@ namespace ArchitecturePlayground.Data
 
         public DbSet<Video> Videos { get; set; } = null!;
         public DbSet<Streamer> Streamers { get; set; } = null!;
+        public DbSet<Actor> Actors { get; set; } = null!;
+        public DbSet<Director> Directors { get; set; } = null!;
+        public DbSet<VideoActor> VideoActors { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -8,6 +8,15 @@ namespace ArchitecturePlayground.Domain
 {
     public class Video
     {
+        protected Video() { }
+
+        public Video(string title, string description, string url)
+        {
+            Title = title;
+            Description = description;
+            Url = url;
+        }
+
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;

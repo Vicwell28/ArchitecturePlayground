@@ -8,6 +8,14 @@ namespace ArchitecturePlayground.Domain
 {
     public class VideoActor
     {
+        protected VideoActor() { }
+
+        public VideoActor(int videoId, int actorId)
+        {
+            VideoId = videoId;
+            ActorId = actorId;
+        }
+
         public int VideoId { get; set; }
         public Video Video { get; set; } = null!;
 
